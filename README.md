@@ -34,4 +34,4 @@ curl -s https://fluxcd.io/install.sh | sudo bash
 kind create cluster --name belajar
 ```
 
-It is creating a kind kubernetes cluster named kind-belajar
+First step is creating a kind kubernetes cluster named kind-belajar or something. Meanwhile, prepare the repository which is on github in this case. The repository can be either public or private but it need to have an access token that will be used by flux to pull the code and run it in our local cluster
