@@ -9,6 +9,7 @@ metadata:
 # Path to the resources this Kustomization should deploy
 resources:
   - deployment.yaml
+  - service.yaml
 
 # Optional: you can add labels to identify Flux-managed resources
 commonLabels:
