@@ -12,6 +12,26 @@ This repo is about my journey of learning kubernetes
 
 ### Docker
 
+```
+sudo apt install docker.io -y
+```
+
 ### Kind
 
+```
+brew install Kind
+```
+
 ### Flux
+
+```
+curl -s https://fluxcd.io/install.sh | sudo bash
+```
+
+## Steps to setup the cluster
+
+```
+kind create cluster --name belajar
+```
+
+It is creating a kind kubernetes cluster named kind-belajar
