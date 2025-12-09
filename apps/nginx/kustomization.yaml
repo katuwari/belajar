@@ -4,7 +4,7 @@ kind: Kustomization
 # Name of this Kustomization inside Flux
 metadata:
   name: nginx
-  namespace: default
+  namespace: flux-system
 
 # Path to the resources this Kustomization should deploy
 resources:
