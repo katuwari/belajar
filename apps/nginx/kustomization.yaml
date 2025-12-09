@@ -1,2 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Name of this Kustomization inside Flux
+metadata:
+  name: nginx
+  namespace: default
+
+# Path to the resources this Kustomization should deploy
 resources:
   - deployment.yaml
+
+# Optional: you can add labels to identify Flux-managed resources
+commonLabels:
+  app.kubernetes.io/managed-by: flux
