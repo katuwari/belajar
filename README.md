@@ -2,6 +2,21 @@
 
 This repo is about my journey of learning kubernetes
 
+This project demonstrates a local GitOps Kubernetes workflow using Docker, kind, Flux, and GitHub.
+
+Docker is used to build and run containerized applications.
+A local Kubernetes cluster is provisioned with kind (Kubernetes in Docker)
+
+GitHub acts as the single source of truth. Any changes merged into the main branch are automatically reconciled and applied to the Kubernetes cluster by Flux.
+
+Flux will be continuously synchronizes the cluster state with this GitHub repository. All application and infrastructure changes are managed declaratively through Git
+
+This setup enables:
+
+1. Automated deployments
+2. Versioned and auditable infrastructure
+3. Safe updates through pull requests
+
 ## Tools installed
 
 1. Docker version 26.1.5+dfsg1, build a72d7cd : used as the nodes/resources of the kubernetes
