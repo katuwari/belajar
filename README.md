@@ -1,31 +1,29 @@
 # belajar
 
-This repo is about my journey of learning kubernetes
+Repo ini merupakan catatan dari kegiatan belajar kubernetes dengan mendemonstrasikan gitops kubernetes workflow menggunakan Docker, kind, Flux, and GitHub. Fungsi dari masing - masing komponen adalah:
 
-This project demonstrates a local GitOps Kubernetes workflow using Docker, kind, Flux, and GitHub.
+1. Docker digunakan untuk membangun dan menjalankan aplikasi dalam bentuk container. Dalam hal ini hanya digunakan sebagai node kubernetes
+2. kind (Kubernetes in Docker) digunakan untuk menyediakan cluster Kubernetes secara lokal.
+3. GitHub berperan sebagai single source of truth. Setiap perubahan yang di-merge ke branch utama akan secara otomatis disinkronkan dan diterapkan ke cluster Kubernetes oleh Flux.
+4. Flux secara terus-menerus menjaga agar kondisi cluster tetap selaras dengan isi repositori GitHub ini. Seluruh perubahan aplikasi dan infrastruktur dikelola secara deklaratif melalui Git.
 
-Docker is used to build and run containerized applications.
-A local Kubernetes cluster is provisioned with kind (Kubernetes in Docker)
+Setup ini ingin mereplikasi apa yang digunakan industri pada umumnya yaitu::
 
-GitHub acts as the single source of truth. Any changes merged into the main branch are automatically reconciled and applied to the Kubernetes cluster by Flux.
+1. Deployment otomatis menggunakan CI/CD
+2. Infrastruktur yang berbasis versi dan dapat diaudit
+3. Update yang aman melalui pull request dengan part reviewing
 
-Flux will be continuously synchronizes the cluster state with this GitHub repository. All application and infrastructure changes are managed declaratively through Git
+## Tools dan versi yang digunakan
 
-This setup enables:
+1. Docker version 26.1.5+dfsg1, build a72d7cd
+2. Kind version 0.30.0
+3. Flux version 2.7.5
 
-1. Automated deployments
-2. Versioned and auditable infrastructure
-3. Safe updates through pull requests
-
-## Tools installed
-
-1. Docker version 26.1.5+dfsg1, build a72d7cd : used as the nodes/resources of the kubernetes
-2. Kind version 0.30.0 : used as the kubernetes distribution
-3. Flux version 2.7.5 : used as the runner to run the changes
-
-## Installation
+## Instalasi dan Konfigurasi
 
 ### Docker
+
+Docker hanya perlu diinstall tanpa ada konfigurasi yang dilakukan secara umum. Docker yang digunakan dalam proyek ini adalah docker.io dengan cara install sebagai berikut:
 
 ```
 sudo apt install docker.io -y
@@ -33,20 +31,33 @@ sudo apt install docker.io -y
 
 ### Kind
 
+Sedangkan kind setelah diinstall dengan command berikut:
+
 ```
 brew install Kind
 ```
 
-### Flux
-
-```
-curl -s https://fluxcd.io/install.sh | sudo bash
-```
-
-## Steps to setup the cluster
+ada konfigurasi yang dilakukan untuk create cluster yaitu:
 
 ```
 kind create cluster --name belajar
 ```
 
-First step is creating a kind kubernetes cluster named kind-belajar or something. Meanwhile, prepare the repository which is on github in this case. The repository can be either public or private but it need to have an access token that will be used by flux to pull the code and run it in our local cluster
+dimana kubernetes cluster yang akan di create bernama kind-belajar
+
+```
+❯ k config current-context
+kind-belajar
+```
+
+### GitHub
+
+Untuk GitHub tidak ada instalasi karena yang digunakan adalah GitHub.com. Yang perlu dilakukan adalah membuat repository baik public atau private dan create "personal access token" yang nantinya akan digunakan oleh Flux untuk pull repo
+
+### Flux
+
+Untuk Flux konfigurasi yang dilakuakn lumayan banyak, diawali dengan instalasi menggunakan command berikut:
+
+```
+curl -s https://fluxcd.io/install.sh | sudo bash
+```
