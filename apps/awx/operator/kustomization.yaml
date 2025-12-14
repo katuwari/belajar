@@ -1,0 +1,3 @@
+resources:
+  - github.com/ansible/awx-operator/config/default?ref=2.19.1
+namespace: awx
